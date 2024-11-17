@@ -1,5 +1,5 @@
 #include <iostream>
-#include <vector>
+//#include <vector>
 
 //typedef std::string str;//save time writing 
 using str = std::string;//same thing but cooler
