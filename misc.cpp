@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-
+#include <limits>
 
 int main() {
     using std::cout;
@@ -26,10 +26,22 @@ int main() {
         if (cin >> age) {
             cout<<"are you sure?";
             cin>>sure;
-            toupper()
-            if(sure == 'Y') 
-            
-            break;
+            sure = toupper(sure);
+            switch (sure)
+            {
+            case 'Y':
+                age = age;
+                break;
+            case 'N':
+                cout<<"then how old are you really?";
+                break;
+            default:
+                cout<<"ninja";
+                break;
+            }
+            if (sure == 'Y') {
+                break;
+            }
         } else {
             cout << "That isn't your age, silly :P" << endl;
             cin.clear();
@@ -37,6 +49,6 @@ int main() {
             cout << "go on tell me you age\nage: ";
         }
     }
-
+    cout<<age;
     return 0;
 }
