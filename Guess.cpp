@@ -26,7 +26,7 @@ int main() {
         
         if(guess != num){
             tries=tries+1;
-            cout<<"Guess again\nNo.Tries: "<<tries<<endl;
+            cout<<"Guess again\nAttempt: "<<tries<<endl;
         }
     } while (guess != num);
     
