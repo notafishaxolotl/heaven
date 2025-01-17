@@ -11,9 +11,9 @@
 /*using std::getline;
 using std::ws;*/
 
-void x(){ //replace x for new function name
-
-}
-int main() {   
+void x();//replace x for new function name
+int main() {
     return 0;
+}
+void x(){ //this can repllace line14
 }
