@@ -45,24 +45,34 @@ void ballance(double cash){
     cout<<"\nYour ballance is $"<< setprecision(2) << fixed <<cash;
 }
 double deposit(double cash){
-    double money;
+    double amount;
     char check;
     cout<<"How much would you like to deposite?\n";
-    cin>>money;
-    if (money<0) {
+    cin>>amount;
+    if (amount<0) {
         cout << "Invalid ammount!" << endl;
     
         return 0;
     }
     cout<<"Funds were sucsefully added!\nWould you like to see your new balance(Y/n): ";
-    cin>>check;
-    check=tolower(check);
-    if (check=='y'){
-        money=cash+money;
-        ballance(money);
-    }
     
-    return money;
+    do{
+        cin>>check;
+        switch (check){
+        case 'y':
+            amount+=cash;
+            ballance(amount);
+            break;
+
+        case 'n':
+            break;
+        default:
+            cout<<"Please only enter Y/n: ";
+            break;
+        }
+        
+    }while(check != 'y' && check != 'n');
+    return amount;
 }
 double withdraw(double cash){
     double amount;
@@ -77,13 +87,23 @@ double withdraw(double cash){
         return 0;
     }
     cout << "Amount withdrawn successfully!" << endl;
-
     cout<<"Funds were sucsefully withdrawed!\nWould you like to see your new balance(Y/n): ";
-    cin>>check;
-    check=tolower(check);
-    if (check=='y'){
-        amount=cash-amount;
-        ballance(amount);
-    }
+    do{
+        
+        cin>>check;
+        switch (check){
+        case 'y':
+            cash -= amount;;
+            ballance(amount);
+            return amount;
+            break;
+        case 'n':
+            return amount;
+            break;
+        default:
+            cout<<"Please only enter Y/n: ";
+            break;
+        }
+    }while(check != 'y' && check != 'n');
     return amount;
 }
