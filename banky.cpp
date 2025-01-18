@@ -1,19 +1,9 @@
 #include <iostream>
-//#include <string>
-//#include <ctime>
 #include<list>
 #include <algorithm>
+#include <limits>
 
-using std::cout;
-//using str = std::string;
-using std::cin;
-using std::endl;
-//using std::tolower;
-//using std::toupper;
-/*using std::getline;
-using std::ws;*/
-using std::list;
-using std::find;
+using namespace std;
 
 void ballance(double cash);
 double deposit();
@@ -22,15 +12,16 @@ int main(){
     list<int> select = {1, 2, 3, 4};
     double cash = 0.00;
     int choice = 0;
-    //auto check = find(select.begin(), select.end(), choice);
 
     while(true){ 
         
         cout<<"\n***********************\n1:Veiw valable ballance\n2:Deposit cash\n"<<
         "3:Withdraw cash\n4:Ext\n***********************\nEnter your choice: ";cin>>choice;
         cout<<"***********************\n";
-        
-        if (find(select.begin(), select.end(), choice) == select.end()) {
+
+        if (cin.fail()||find(select.begin(), select.end(), choice) == select.end()) {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
             cout << "Invalid choice. Please enter a number between 1 and 4.\n";
             continue;
         }
@@ -40,7 +31,7 @@ int main(){
         case 1:ballance(cash);break;
         case 2:cash+=deposit();break;
         case 3:cash-=withdraw(cash);break;
-        case 4:cout<<"Thanks for visiting!\n***********************\n";return 1;
+        case 4:cout<<"Thanks for visiting!\n***********************\n";return 0;
         
         default:
             break;
@@ -50,7 +41,7 @@ int main(){
     return 0;
 }
 void ballance(double cash){
-    cout<<"\nYour ballance is $"<<cash<<"***********************\n";
+    cout<<"\nYour ballance is $"<<cash;
 }
 double deposit(){
     double money;
