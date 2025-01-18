@@ -2,11 +2,12 @@
 #include<list>
 #include <algorithm>
 #include <limits>
+#include <iomanip>
 
 using namespace std;
 
 void ballance(double cash);
-double deposit();
+double deposit(double cash);
 double withdraw(double cash);
 int main(){
     list<int> select = {1, 2, 3, 4};
@@ -22,14 +23,14 @@ int main(){
         if (cin.fail()||find(select.begin(), select.end(), choice) == select.end()) {
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            cout << "Invalid choice. Please enter a number between 1 and 4.";
+            cout << "Invalid choice. Please enter a number between 1 and 4. ";
             continue;
         }
         
         switch (choice)
         {
         case 1:ballance(cash);break;
-        case 2:cash+=deposit();break;
+        case 2:cash+=deposit(cash);break;
         case 3:cash-=withdraw(cash);break;
         case 4:cout<<"Thanks for visiting!\n***********************\n";return 0;
         
@@ -41,27 +42,48 @@ int main(){
     return 0;
 }
 void ballance(double cash){
-    cout<<"\nYour ballance is $"<<cash;
+    cout<<"\nYour ballance is $"<< setprecision(2) << fixed <<cash;
 }
-double deposit(){
+double deposit(double cash){
     double money;
+    char check;
     cout<<"How much would you like to deposite?\n";
     cin>>money;
     if (money<0) {
-        cout << "Insufficient funds!" << endl;
+        cout << "Invalid ammount!" << endl;
+    
         return 0;
+    }
+    cout<<"Funds were sucsefully added!\nWould you like to see your new balance(Y/n): ";
+    cin>>check;
+    check=tolower(check);
+    if (check=='y'){
+        money=cash+money;
+        ballance(money);
     }
     
     return money;
 }
 double withdraw(double cash){
     double amount;
+    char check;
     cout << "Enter amount to withdraw: ";
     cin >> amount;
-    if (amount > cash||amount<0) {
+    if (amount<0) {
+        cout << "Invalid ammount!" << endl;
+    }
+    if (amount > cash) {
         cout << "Insufficient funds!" << endl;
         return 0;
     }
     cout << "Amount withdrawn successfully!" << endl;
+
+    cout<<"Funds were sucsefully withdrawed!\nWould you like to see your new balance(Y/n): ";
+    cin>>check;
+    check=tolower(check);
+    if (check=='y'){
+        amount=cash-amount;
+        ballance(amount);
+    }
     return amount;
 }
