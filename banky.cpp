@@ -17,12 +17,12 @@ int main(){
         
         cout<<"\n***********************\n1:Veiw valable ballance\n2:Deposit cash\n"<<
         "3:Withdraw cash\n4:Ext\n***********************\nEnter your choice: ";cin>>choice;
-        cout<<"***********************\n";
+        cout<<"\n***********************\n";
 
         if (cin.fail()||find(select.begin(), select.end(), choice) == select.end()) {
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            cout << "Invalid choice. Please enter a number between 1 and 4.\n";
+            cout << "Invalid choice. Please enter a number between 1 and 4.";
             continue;
         }
         
@@ -47,13 +47,18 @@ double deposit(){
     double money;
     cout<<"How much would you like to deposite?\n";
     cin>>money;
+    if (money<0) {
+        cout << "Insufficient funds!" << endl;
+        return 0;
+    }
+    
     return money;
 }
 double withdraw(double cash){
     double amount;
     cout << "Enter amount to withdraw: ";
     cin >> amount;
-    if (amount > cash) {
+    if (amount > cash||amount<0) {
         cout << "Insufficient funds!" << endl;
         return 0;
     }
